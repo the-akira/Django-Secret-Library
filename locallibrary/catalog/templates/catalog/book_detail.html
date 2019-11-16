@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="container">
+  <h2>Título: {{ book.title }}</h2>
+  <br>
+  <p><strong>Autor:</strong> <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Sumário:</strong> {{ book.summary }}</p>
+  <p><strong>ISBN:</strong> {{ book.isbn }}</p> 
+  <p><strong>Idioma:</strong> {{ book.language }}</p>  
+  <p><strong>Gênero:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+  {% if perms.catalog.can_mark_returned %}  
+    <a href="{% url 'book_update' book.pk %}" class="btn btn-primary">Atualizar</a>
+    <a href="{% url 'book_delete' book.pk %}" class="btn btn-primary">Remover</a>
+  {% endif %} 
+  <div>
+    <hr>
+    <h4>Cópias:</h4>
+    {% for copy in book.bookinstance_set.all %}
+      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+      {% if copy.status != 'a' %}
+        <p><strong>Due to be returned:</strong> {{copy.due_back}}</p>
+      {% endif %}
+      <p><strong>Imprint:</strong> {{copy.imprint}}</p>
+      <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

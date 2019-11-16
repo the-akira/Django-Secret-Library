@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h3>Renovar: {{ book_instance.book.title }}</h3>
+  <p>Receptor: <strong>{{ book_instance.borrower }}</strong></p>
+  <p{% if book_instance.is_overdue %} class="text-danger"{% endif %}>Data de entrega: <strong>{{ book_instance.due_back }}</strong></p>
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </form>
+{% endblock %}

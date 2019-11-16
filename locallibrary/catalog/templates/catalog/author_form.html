@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <form action="" method="post" class="form-group mt-3">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="Submit" class="btn btn-primary mt-3">
+  </form>
+{% endblock %}

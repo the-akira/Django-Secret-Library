@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="container">
+  <div>
+    <h4>{{ author.first_name }} {{ author.last_name }}</h4>
+    {% if perms.catalog.can_mark_returned %}  
+      <a href="{% url 'author_update' author.pk %}" class="btn btn-primary">Atualizar</a>
+      <a href="{% url 'author_delete' author.pk %}" class="btn btn-primary">Remover</a>
+    {% endif %} 
+    <br>
+    <br>
+    <div>
+    {% for book in author.book_set.all %}
+      <a href="{% url 'book-detail' book.pk %}"><h5 class="livro">{{book}} ({{book.bookinstance_set.all.count}})</h5></a> 
+      <dd>{{book.summary}}</dd>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

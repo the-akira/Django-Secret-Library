@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Biblioteca Secreta</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css" crossorigin="anonymous">
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="container caixa-principal">
+    <div class="row">
+      <div class="col-sm-4 col-md-12 col-lg-4">
+      {% block sidebar %}
+        <ul class="nav flex-column">
+          <li class="btn btn-primary nav-link text-center"><a href="{% url 'index' %}">Home</a></li>
+          {% if perms.catalog.can_mark_returned %}
+            <li class="btn btn-primary nav-link text-center"><a href="{% url 'borrowed' %}">Livros Emprestados</a></li>
+            <li class="btn btn-primary nav-link text-center"><a href="{% url 'book_create' %}">Adicionar Livro</a></li>
+            <li class="btn btn-primary nav-link text-center"><a href="{% url 'author_create' %}">Adicionar Autor</a></li>  
+          {% endif %} 
+          <li class="btn btn-primary nav-link text-center"><a href="{% url 'books' %}">Todos os Livros</a></li>
+          <li class="btn btn-primary nav-link text-center"><a href="{% url 'authors' %}">Todos os Autores</a></li>
+             {% if user.is_authenticated %}
+               <li class="btn btn-secondary nav-link text-center mt-2">Usuário Logado:<b> {{ user.get_username }}</b></li>
+               <li class="btn btn-primary nav-link text-center"><a href="{% url 'my-borrowed' %}">Meus Livros</a></li>
+               <li class="btn btn-primary nav-link text-center"><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+             {% else %}
+               <li class="btn btn-primary nav-link text-center"><a href="{% url 'login'%}?next={{request.path}}">Login</a></li> 
+             {% endif %} 
+        </ul>
+     {% endblock %}
+      </div>
+      <div class="col-sm-8 col-md-12 col-lg-8">
+          {% block content %}{% endblock %}
+            {% block pagination %}
+              {% if is_paginated %}
+                  <div class="pagination">
+                      <span class="page-links">
+                          {% if page_obj.has_previous %}
+                              <a class="btn btn-primary" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">&laquo; anterior</a>
+                          {% endif %}
+                          <span class="page-current btn btn-primary">
+                              Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                          </span>
+                          {% if page_obj.has_next %}
+                              <a class="btn btn-primary" href="{{ request.path }}?page={{ page_obj.next_page_number }}">próxima &raquo;</a>
+                          {% endif %}
+                      </span>
+                  </div>
+              {% endif %}
+          {% endblock %} 
+      </div>
+    </div>
+  </div>
+</body>
+</html>

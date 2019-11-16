@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="container">
+      <h2>Livros</h2>
+      <form method="GET">
+          <input type="text" class="form-control" name="q" id="id_q" placeholder="Search...">
+      </form>
+      <br>
+      {% if books %}
+      <ul class="list-group">
+        {% for book in books %}
+          <li class="list-group-item">
+            <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
+            <p>{{ book.summary }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <p>Livro não encontrado.</p>
+      {% endif %}  
+</div>  
+{% endblock %}
