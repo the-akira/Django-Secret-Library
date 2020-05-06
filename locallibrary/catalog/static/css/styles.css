@@ -1,8 +1,9 @@
 .nav{
 	padding: 20px;
 	border: 1px solid white;
-	margin-top: 15px;
+	margin: auto;
 	background-color: #222222; 
+	border-radius: 10px;
 }
 
 a{
