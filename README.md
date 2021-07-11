@@ -1,5 +1,7 @@
 # Django Secret Library
 
+![img](https://raw.githubusercontent.com/the-akira/Django-Secret-Library/master/locallibrary/catalog/static/images/Avatar.png)
+
 Full Featured Library System made with Django.
 
 ## Some features included
