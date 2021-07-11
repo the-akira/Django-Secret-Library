@@ -1,6 +1,6 @@
 # Django Secret Library
 
-Full Features Library System made with Django
+Full Featured Library System made with Django.
 
 ## Some features included
 
@@ -16,7 +16,7 @@ Full Features Library System made with Django
 ### Clone the Repository
 
 ```
-git clone https://github.com/the-akira/django-secret-library.git
+git clone https://github.com/the-akira/Django-Secret-Library.git
 ```
 
 ### Inside the Main Directory
@@ -47,4 +47,4 @@ python manage.py runserver
 
 You can now open your Web Browser and navigate to `http://127.0.0.1:8000/` to see the Web Application.
 
-Inspired by the great tutorial of **[MDN Web Docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)**
+Inspired by the great tutorial of **[MDN Web Docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)**.
